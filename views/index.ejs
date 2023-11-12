@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/style.css">
+    <title>Meme Generator</title>
+</head>
+<body>
+    <%- include('header.ejs') %>
+
+    <div class="container">
+        <h1>Meme Generator</h1>
+
+        <% if (topTextValue) { %>
+            <div class="meme-text top"><%= topTextValue %></div>
+        <% } %>
+
+        <% if (imageURL) { %>
+            <% console.log(imageURL); %>
+            <img src="<%= imageURL %>" alt="Generated Meme Image">
+            <% } else { %>
+                <div class="meme-container">
+                    <form action="/generate" method="post" enctype="multipart/form-data">
+                        <label for="image-upload">Upload an Image:</label>
+                        <input type="file" name="image" id="image-upload" accept="image/*">
+                        <textarea name="topText" placeholder="Top Text"></textarea>
+                        <textarea name="bottomText" placeholder="Bottom Text"></textarea>
+                        <button type="submit">Generate Meme</button>
+                    </form>
+                    <p>Upload an image to generate a meme.</p>
+                </div>
+        <% } %>
+        
+        <% if (bottomTextValue) { %>
+            <div class="meme-text bottom"><%= bottomTextValue %></div>
+        <% } %>
+    </div>
+    
+    <%- include('footer.ejs') %>
+</body>
+</html>
